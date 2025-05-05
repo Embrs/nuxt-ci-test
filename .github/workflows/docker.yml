@@ -3,7 +3,7 @@ name: Build and Push Docker Image
 on:
   push:
     tags:
-      - 'v*.*.*'  # 只有 push tag 如 v1.2.3 才會觸發
+      - 'v*.*.*'  # 當推送符合此模式的 tag（例如 v1.2.3）時觸發
 
 jobs:
   docker:
