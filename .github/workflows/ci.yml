@@ -1,0 +1,31 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # 例如 v1.2.3 時觸發
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} --password-stdin
+
+      - name: Extract version from Git tag
+        id: vars
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Build and tag Docker image
+        run: |
+          docker build -t ghcr.io/${{ secrets.GHCR_USERNAME }}/myapp:${{ steps.vars.outputs.VERSION }} .
+          docker tag ghcr.io/${{ secrets.GHCR_USERNAME }}/myapp:${{ steps.vars.outputs.VERSION }} ghcr.io/${{ secrets.GHCR_USERNAME }}/myapp:latest
+
+      - name: Push Docker images
+        run: |
+          docker push ghcr.io/${{ secrets.GHCR_USERNAME }}/myapp:${{ steps.vars.outputs.VERSION }}
+          docker push ghcr.io/${{ secrets.GHCR_USERNAME }}/myapp:latest
