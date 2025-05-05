@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   web:
-    image: ghcr.io/embrs/nuxt-ci-test:1.2.10
+    image: ghcr.io/embrs/nuxt-ci-test:latest
     ports:
       - '3000:3000'
     restart: always

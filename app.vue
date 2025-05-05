@@ -12,7 +12,7 @@
 onMounted(async() => {
   const msg = ref('');
   console.log('onMounted')
-  const { data } = await useFetch('http://backend:8000')
+  const { data } = await useFetch('http://api/')
   msg.value = data.value?.message
 })
 </script>
