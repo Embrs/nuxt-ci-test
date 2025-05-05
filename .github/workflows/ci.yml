@@ -22,10 +22,10 @@ jobs:
 
       - name: Build and tag Docker image
         run: |
-          docker build -t ghcr.io/${{ secrets.GHCR_USERNAME }}/myapp:${{ steps.vars.outputs.VERSION }} .
-          docker tag ghcr.io/${{ secrets.GHCR_USERNAME }}/myapp:${{ steps.vars.outputs.VERSION }} ghcr.io/${{ secrets.GHCR_USERNAME }}/myapp:latest
+          docker build -t ghcr.io/${{ secrets.GHCR_USERNAME }}/nuxt-ci-test:${{ steps.vars.outputs.VERSION }} .
+          docker tag ghcr.io/${{ secrets.GHCR_USERNAME }}/nuxt-ci-test:${{ steps.vars.outputs.VERSION }} ghcr.io/${{ secrets.GHCR_USERNAME }}/nuxt-ci-test:latest
 
       - name: Push Docker images
         run: |
-          docker push ghcr.io/${{ secrets.GHCR_USERNAME }}/myapp:${{ steps.vars.outputs.VERSION }}
-          docker push ghcr.io/${{ secrets.GHCR_USERNAME }}/myapp:latest
+          docker push ghcr.io/${{ secrets.GHCR_USERNAME }}/nuxt-ci-test:${{ steps.vars.outputs.VERSION }}
+          docker push ghcr.io/${{ secrets.GHCR_USERNAME }}/nuxt-ci-test:latest
