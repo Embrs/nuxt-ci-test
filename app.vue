@@ -15,8 +15,8 @@ const mas = ref();
 
 const Clicked = async() => {
   const { data } = await useFetch(path.value)
-  console.log(data)
-  erf = data
+  console.log(data.value)
+  mas.value = data.value
 }
 
 </script>
