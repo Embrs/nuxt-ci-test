@@ -1,18 +1,22 @@
 <template>
   <div>
     <p> TEST111 </p>
-    <p> {{ msg }}</p>
+    <input type="text" v-model="path">
+    <button @click="Clicked">fetch</button>
+    <pre>{{ mas }}</pre>
       <!-- <NuxtRouteAnnouncer />
       <NuxtWelcome /> -->
   </div>
 </template>
 
 <script setup>
+const path = ref('/api/users');
+const mas = ref();
 
-onMounted(async() => {
-  const msg = ref('');
-  console.log('onMounted')
-  const { data } = await useFetch('http://api/')
-  msg.value = data.value?.message
-})
+const Clicked = async() => {
+  const { data } = await useFetch(path.value)
+  console.log(data)
+  erf = data
+}
+
 </script>
